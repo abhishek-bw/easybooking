@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=easyappointments
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
+      - BASE_URL=http://localhost
+      - LANGUAGE=english
+      - DEBUG_MODE=FALSE
+      - GOOGLE_SYNC_FEATURE=FALSE
+      - GOOGLE_PRODUCT_NAME=
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
+      - GOOGLE_API_KEY=
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: easyappointments
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
