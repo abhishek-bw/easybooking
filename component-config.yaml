@@ -1,0 +1,16 @@
+apiVersion: core.choreo.dev/v1beta1
+kind: ComponentConfig
+spec:
+  inbound:
+    - name: EasyAppointmentsService
+      port: 80
+      type: REST
+      networkVisibility: Public
+      context: /
+  outbound:
+    serviceReferences:
+      - name: db
+        connectionConfig: your-connection-config
+        env:
+          - from: ServiceURL
+            to: DB_HOST
