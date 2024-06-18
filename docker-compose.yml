@@ -22,6 +22,8 @@ services:
       - db
     volumes:
       - .:/var/www/html
+    networks:
+      - easyappointments
 
   db:
     image: mysql:5.7
@@ -30,6 +32,12 @@ services:
       MYSQL_DATABASE: easyappointments
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - easyappointments
+
+networks:
+  easyappointments:
+    driver: bridge
 
 volumes:
   db_data:
